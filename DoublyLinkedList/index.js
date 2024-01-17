@@ -145,11 +145,30 @@ class DoublyLinkedList {
     }
     return false;
   }
+
+  reverse() {
+    if (this.length < 2) {
+      return;
+    }
+    let temp = this.head;
+    // 1->2->3->4
+    // temp = 3
+    // 3.next = 2;
+    // 3.prev = 3
+    while (temp && temp.next !== null) {
+      temp = temp.next;
+      temp.next = temp.prev;
+      temp.prev = temp;
+    }
+    this.head = this.tail;
+    this.tail = temp;
+    return this;
+  }
 }
 
 const myDoublyLinkedList = new DoublyLinkedList(1);
 myDoublyLinkedList.push(2);
 myDoublyLinkedList.push(3);
-myDoublyLinkedList.remove(1);
+myDoublyLinkedList.push(4);
 
-console.log("🚀 ~ myDoublyLinkedList:", myDoublyLinkedList);
+console.log("🚀 ~ myDoublyLinkedList:", myDoublyLinkedList.reverse());
